@@ -1,5 +1,6 @@
 package com.reinstein.heberth.address;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.reinstein.heberth.address.exceptions.AddressNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +20,7 @@ public class AddressController {
     }
 
     @PostMapping
-    public void saveAddress(@RequestBody Address address){
+    public void saveAddress(@RequestBody Address address) throws JsonProcessingException {
         this.addressService.save(address);
     }
 
@@ -29,7 +30,7 @@ public class AddressController {
     }
 
     @PutMapping
-    public void updateAddress(@RequestBody Address address) throws AddressNotFoundException {
+    public void updateAddress(@RequestBody Address address) throws AddressNotFoundException, JsonProcessingException {
         this.addressService.updateAddress(address);
     }
 

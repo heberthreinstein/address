@@ -40,4 +40,16 @@ public class Address {
     private String longitude;
 
     private String latitude;
+
+    @Override
+    public String toString() {
+        return complement + ", "
+                + number + ", "
+                + streetName + ", "
+                + neighbourhood + ", "
+                + city + ", "
+                + state + ", "
+                + country + ", "
+                + zipcode;
+    }
 }
