@@ -20,8 +20,8 @@ public class AddressController {
     }
 
     @PostMapping
-    public void saveAddress(@RequestBody Address address) throws JsonProcessingException {
-        this.addressService.save(address);
+    public Address saveAddress(@RequestBody Address address) throws JsonProcessingException {
+        return this.addressService.save(address);
     }
 
     @DeleteMapping
@@ -30,8 +30,8 @@ public class AddressController {
     }
 
     @PutMapping
-    public void updateAddress(@RequestBody Address address) throws AddressNotFoundException, JsonProcessingException {
-        this.addressService.updateAddress(address);
+    public Address updateAddress(@RequestBody Address address) throws AddressNotFoundException, JsonProcessingException {
+        return this.addressService.updateAddress(address);
     }
 
 

@@ -24,10 +24,12 @@ public class AddressService {
         return this.addressRepository.findAll();
     }
 
-    public void save(Address address) throws JsonProcessingException {
+    public Address save(Address address) throws JsonProcessingException {
         if (address.getLatitude() == null || address.getLongitude() == null)
             address = this.getLatitudeLongitudeFromGoogle(address);
         this.addressRepository.save(address);
+
+        return address;
     }
 
     public void deleteAddressById(Long id) throws AddressNotFoundException {
@@ -36,7 +38,7 @@ public class AddressService {
     }
 
     @Transactional(rollbackFor=Exception.class)
-    public void updateAddress(Address updatedAddress) throws AddressNotFoundException, JsonProcessingException {
+    public Address updateAddress(Address updatedAddress) throws AddressNotFoundException, JsonProcessingException {
         final Long id = updatedAddress.getId();
 
         Address address = this.addressRepository.findById(id)
@@ -55,6 +57,8 @@ public class AddressService {
         if (updatedAddress.getZipcode() != null) address.setZipcode(updatedAddress.getZipcode());
         if (updatedAddress.getLatitude() != null) address.setLatitude(updatedAddress.getLatitude());
         if (updatedAddress.getLongitude() != null) address.setLongitude(updatedAddress.getLongitude());
+
+        return address;
     }
 
     public Address getLatitudeLongitudeFromGoogle(Address address) throws JsonProcessingException {
